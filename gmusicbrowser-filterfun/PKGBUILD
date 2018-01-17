@@ -1,0 +1,64 @@
+# Maintainer: Spike29 <leguen.yannick@gmail.com>
+# Contributor: jsteel <mail at jsteel dot org>
+# Contributor: Corrado Primier <bardo@aur.archlinux.org>
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+_pkgname=gmusicbrowser
+pkgname=gmusicbrowser-filterfun
+pkgver=1.1.15
+pkgrel=1
+pkgdesc="A customizable open-source jukebox for large collections"
+arch=('any')
+url="http://gmusicbrowser.org"
+license=('GPL3')
+depends=('gtk2-perl' 'hicolor-icon-theme' 'perl-net-dbus')
+optdepends=('alsa-utils: enables the ALSA backend'
+            'flac123: flac support for the ALSA backend'
+            'mpg321: mp3 support for the ALSA backend'
+            'vorbis-tools: vorbis support for the ALSA backend'
+            'mplayer: enables the mplayer backend'
+            'mpv: enables the mpv backend'
+	        'gstreamer: enables the gstreamer backend'
+            'perl-glib-object-introspection: enables the gstreamer backend'
+            'gst-plugins-base: vorbis support for the gstreamer backend' 
+            'gst-plugins-good: flac support for the gstreamer backend'
+            'gst-plugins-bad: mpc support for the gstreamer backend'
+            'gst-plugins-ugly: mp3 support for the gstreamer backend'
+            'perl-gstreamer: enables the old gstreamer0.10 backend'
+            'gstreamer0.10-base: vorbis support for the gstreamer0.10 backend' 
+            'gstreamer0.10-good-plugins: flac support for the gstreamer0.10 backend'
+            'gstreamer0.10-bad-plugins: mpc support for the gstreamer0.10 backend'
+            'gstreamer0.10-ugly-plugins: mp3 support for the gstreamer0.10 backend'
+            'perl-locale-gettext: localization support'
+            'perl-gtk2-trayicon: tray icon support'
+            'perl-gtk2-appindicator: app indicator plugin support'
+            'perl-gtk2-mozembed: web-based plugins support'
+            'perl-gtk2-webkit: alternative web-based plugin support'
+            'perl-gtk2-notify: show notifications using libnotify'
+            'perl-html-parser: support for accented characters in lyrics plugin')
+conflicts=('gmusicbrowser' 'gmusicbrowser-git' 'gmusicbrowser-shimmer' 'gmusicbrowser-shimmer-git')
+options=('!libtool')
+install=$_pkgname.install
+source=("$url/download/$_pkgname-$pkgver.tar.gz"
+	"gmbrc.default"
+	"main.layout"
+	"filterfun.layout"
+	"perl524.patch")
+md5sums=('4a16dcbe369d4b3cb78fb1a6967a60b3'
+	'f0e4c78fe093b9b299a5654c034eb857'
+	'21b7f9e32cfcfe3c2107471d6dc75d77'
+	'd9d0d9cde4702003abdb109b53e934c5'
+	'2073c1f657d9226326807cabda6a894c')
+
+package() {
+  cd "$srcdir"
+  patch -p0 < perl524.patch
+  cd $_pkgname-$pkgver
+
+  make DESTDIR="$pkgdir/" install
+  
+  # Install filterfun configs for Netrunner
+  install -Dm644 "${srcdir}"/gmbrc.default "${pkgdir}"/usr/share/gmusicbrowser/gmbrc.default
+  install -Dm644 "${srcdir}"/main.layout "${pkgdir}"/usr/share/gmusicbrowser/layouts/main.layout
+  install -Dm644 "${srcdir}"/filterfun.layout "${pkgdir}"/usr/share/gmusicbrowser/layouts/filterfun.layout
+}

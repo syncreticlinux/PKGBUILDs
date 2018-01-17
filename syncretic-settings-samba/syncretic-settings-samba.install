@@ -1,0 +1,63 @@
+msg() {
+    ALL_OFF="\e[1;0m"
+    BOLD="\e[1;1m"
+    GREEN="${BOLD}\e[1;32m"
+	local mesg=$1; shift
+	printf "${GREEN}==>${ALL_OFF}${BOLD} ${mesg}${ALL_OFF}" "$@" >&2
+}
+
+add_users() {
+    _l="/etc/login.defs"
+    _p="/etc/passwd"
+
+    ## get mini UID limit ##
+    l=$(grep "^UID_MIN" $_l)
+
+    ## get max UID limit ##
+    l1=$(grep "^UID_MAX" $_l)
+
+    ## use awk to print if UID >= $MIN and UID <= $MAX and shell is not /sbin/nologin   ##
+    users=$(awk -F':' -v "min=${l##UID_MIN}" -v "max=${l1##UID_MAX}" '{ if ( $3 >= min && $3 <= max  && $7 != "/sbin/nologin" ) print $0 }' "$_p" | cut -d: -f1)
+    for i in $users; do
+        msg "Adding user '$i' to user-group 'sambashare'"
+        usermod -a -G sambashare $i
+	msg "Set exec bit for other to /home/'$i' to allow sharing"
+	chmod o+x /home/$i
+    done
+}
+
+add_group() {
+    getent group "sambashare" &>/dev/null || groupadd -r sambashare
+    add_users
+    chgrp sambashare var/lib/samba/usershare
+}
+
+post_upgrade() {
+  add_group
+  echo ""
+  msg "Please add future users to 'sambashare' group."
+  msg "and set exec bit for other to thier home folders to allow sharing"
+  echo ""
+}
+
+post_install() {  
+  systemctl is-active smbd >/dev/null || systemctl enable smbd
+  systemctl is-active nmbd >/dev/null || systemctl enable nmbd
+
+  add_group
+  echo ""
+  msg "Samba services should now be enabled."
+  msg "Please add future users to 'sambashare' group."
+  msg "and set exec bit for other to thier home folders to allow sharing"
+  msg "Reboot your system, so changes will take affect."
+  echo ""
+}
+
+post_remove() { 
+  ! systemctl is-active smbd >/dev/null || systemctl disable smbd
+  ! systemctl is-active nmbd >/dev/null || systemctl disable nmbd
+
+  echo ""
+  msg "Samba services should now be disabled. Reboot your system."
+  echo ""
+}

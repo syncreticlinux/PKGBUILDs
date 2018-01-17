@@ -1,0 +1,39 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=syncretic-settings-theming
+pkgver=$(date +%Y.%m)
+pkgrel=1
+pkgdesc="Default theming settings"
+arch=('any')
+url='https://github.com/netrunner-common/netrunner-settings-theming'
+license=('GPL')
+groups=('syncretic-common')
+makedepends=('git')
+source=('git://github.com/netrunner-common/netrunner-settings-theming' 'Trolltech.conf' 'kcminputrc' '.imwheelrc')
+md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
+
+prepare() {
+  cd $srcdir/$pkgname
+  sed -i '/KDE]/a\LookAndFeelPackage=org.kde.netrunner-rolling.desktop' usr/share/default-settings/plasma5-profile/kdeglobals
+  sed -e 's|^ShadowSize=.*|ShadowSize=28|' -i usr/share/default-settings/plasma5-profile/breezerc
+  sed -e 's|^ShadowStrength=.*|ShadowStrength=51|' -i usr/share/default-settings/plasma5-profile/breezerc
+  sed -e 's|^blurEnabled=.*|blurEnabled=true|' -i usr/share/default-settings/plasma5-profile/kwinrc
+  sed -e 's|^BorderSize=None|BorderSize=NoSides|' -i usr/share/default-settings/plasma5-profile/kwinrc
+  mv etc/gtk-2.0/gtkrc etc/skel/.gtkrc-2.0
+  mv etc/gtk-3.0 etc/skel/.config/
+  rm -r etc/gtk-2.0
+}
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR etc $pkgdir/
+  cp -aR usr $pkgdir/
+   
+# Install modifications for Arch/Manjaro base
+  install -Dm644 "${srcdir}"/Trolltech.conf "${pkgdir}"/etc/skel/.config/Trolltech.conf
+  install -Dm644 "${srcdir}"/kcminputrc "${pkgdir}"/usr/share/default-settings/plasma5-profile/kcminputrc
+  install -Dm644 "${srcdir}"/.imwheelrc "${pkgdir}"/etc/skel/.imwheelrc
+
+}

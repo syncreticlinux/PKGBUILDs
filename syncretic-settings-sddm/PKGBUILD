@@ -1,0 +1,19 @@
+# $Id$
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=netrunner-settings-sddm
+pkgver=$(date +%Y.%m)
+pkgrel=1
+pkgdesc="SDDM Settings for Syncretic"
+arch=('any')
+url="http://syncreticlinux.org"
+license=('GPL')
+groups=('syncretic-common')
+makedepends=('git')
+source=("git+https://github.com/netrunner-common/netrunner-settings-sddm.git")
+sha256sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR usr $pkgdir/
+}

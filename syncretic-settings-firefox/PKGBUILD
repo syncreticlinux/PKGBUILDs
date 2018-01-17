@@ -1,0 +1,20 @@
+# $Id$
+# Maintainer: Matt Kowal <matt@mkxt.ent>
+
+pkgname=syncretic-settings-firefox
+pkgver=$(date +%Y.%m)
+pkgrel=1
+pkgdesc="Settings for firefox, like bookmarks"
+arch=('any')
+url='https://github.com/netrunner-rolling/netrunner-settings-firefox'
+license=('GPL')
+groups=('syncretic-common')
+makedepends=('git')
+source=('git://github.com/netrunner-rolling/netrunner-settings-firefox')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR etc $pkgdir/
+  cp -aR usr $pkgdir/
+}

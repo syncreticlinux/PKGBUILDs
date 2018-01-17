@@ -1,0 +1,19 @@
+# $Id$
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=syncretic-settings-autostart
+pkgver=$(date +%Y.%m)
+pkgrel=1
+pkgdesc="Global and user specific autostart applications"
+arch=('any')
+url='https://github.com/netrunner-common/netrunner-settings-autostart'
+license=('GPL')
+groups=('syncretic-common')
+makedepends=('git')
+source=('git://github.com/netrunner-rolling/netrunner-settings-autostart')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR usr $pkgdir/
+}

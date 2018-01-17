@@ -1,0 +1,19 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=syncretic-settings-desktop
+pkgver=$(date +%Y.%m)
+pkgrel=1
+pkgdesc="Default desktop icons and home folder"
+arch=('any')
+url='https://github.com/netrunner-rolling/netrunner-settings-desktop-rolling'
+license=('GPL')
+groups=('syncretic-common')
+makedepends=('git')
+source=('git://github.com/netrunner-rolling/netrunner-settings-desktop-rolling')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR etc $pkgdir/
+}

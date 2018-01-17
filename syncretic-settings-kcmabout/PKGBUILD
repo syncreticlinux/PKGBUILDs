@@ -1,0 +1,21 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+
+pkgname=syncretic-settings-kcmabout
+pkgver=$(date +%Y.%m)
+pkgrel=1
+pkgdesc="Syncretic kcmabout settings"
+arch=('any')
+url='https://github.com/netrunner-common/netrunner-settings-kcmabout'
+license=('GPL')
+groups=('syncretic-common')
+makedepends=('git')
+source=('git://github.com/netrunner-common/netrunner-settings-kcmabout')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  sed -i -e 's,BuildStamp=@@BUILD_VERSION@@,#BuildStamp=@@BUILD_VERSION@@,' etc/xdg/kcm-about-extendedrc
+  cp -aR etc $pkgdir/
+  cp -aR usr $pkgdir/
+}
