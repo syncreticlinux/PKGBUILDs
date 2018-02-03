@@ -14,7 +14,7 @@ source=('git://github.com/netrunner-rolling/default-systemsettings-settings-roll
 md5sums=('SKIP')
 
 prepare() {
-  cd $srcdir/$pkgname
+  cd $srcdir/$pkgname-rolling
   mkdir -p usr/share/default-settings/plasma5-profile/
   mv kservices5 usr/share/default-settings/plasma5-profile/
 }
