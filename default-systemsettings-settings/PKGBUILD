@@ -2,9 +2,9 @@
 # Maintainer: Matt Kowal <matt@mkxt.net>
 
 pkgname=default-systemsettings-settings
-pkgver=$(date +%Y.%m)
+pkgver=$(date +%Y.%m.%d)
 pkgrel=1
-pkgdesc="Default desktop icons and home folder for Netrunner Rolling"
+pkgdesc="Default desktop icons and home folder for Syncretic Linux"
 arch=('any')
 url='https://github.com/netrunner-rolling/default-systemsettings-settings-rolling'
 license=('GPL')
