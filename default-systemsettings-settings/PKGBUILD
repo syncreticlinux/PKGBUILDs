@@ -20,6 +20,6 @@ prepare() {
 }
 
 package() {
-  cd $srcdir/$pkgname
+  cd $srcdir/$pkgname-rolling
   cp -aR usr $pkgdir/
 }
