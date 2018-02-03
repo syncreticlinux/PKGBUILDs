@@ -1,0 +1,20 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=default-settings-xsession
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Xsession scripts (for setting up plasma5-profile directory looking)"
+arch=('any')
+url='https://github.com/ds9-common/default-settings-xsession'
+license=('GPL')
+groups=('syncretic-core')
+makedepends=('git')
+source=('git://github.com/ds9-common/default-settings-xsession')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR etc $pkgdir/
+}

@@ -1,0 +1,21 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=default-settings-plasma
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Default settings for the Plasma Desktop"
+arch=('any')
+url='https://github.com/ds9-common/default-settings-plasma'
+license=('GPL')
+groups=('syncretic-core')
+makedepends=('git')
+source=('git://github.com/netrunner-rolling/default-settings-plasma')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR etc $pkgdir/
+  cp -aR usr $pkgdir/
+}

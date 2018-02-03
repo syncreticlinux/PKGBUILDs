@@ -1,0 +1,37 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=default-settings-applications
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Default application settings"
+arch=('any')
+url='https://github.com/ds9-common/default-settings-applications'
+license=('GPL')
+groups=('syncretic-core')
+makedepends=('git')
+source=('git://github.com/ds9-common/default-settings-applications'
+        'smplayer.ini'
+        'octopi.conf'
+        'yarock-1.conf')
+md5sums=('SKIP'
+         'SKIP'
+         'SKIP'
+         'SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR etc $pkgdir/
+  cp -aR usr $pkgdir/
+  rm -r "$pkgdir/usr/share/default-settings/plasma5-profile/applications/isowriter.desktop"
+  rm -r "$pkgdir/usr/share/default-settings/plasma5-profile/applications/synaptic.desktop"
+  rm -r "$pkgdir/usr/share/default-settings/plasma5-profile/applications/gltron.desktop"
+  rm -R "$pkgdir/usr/share/gmusicbrowser/"
+  rm -R "$pkgdir/etc/skel/.config/linuxmint/"
+
+  # Install modifications for Arch/Manjaro base
+  install -Dm644 "${srcdir}"/smplayer.ini "${pkgdir}"/etc/skel/.config/smplayer/smplayer.ini
+  install -Dm644 "${srcdir}"/octopi.conf "${pkgdir}"/etc/skel/.config/octopi/octopi.conf
+  install -Dm644 "${srcdir}"/yarock-1.conf "${pkgdir}"/etc/skel/.config/yarock/yarock-1.conf
+}

@@ -1,0 +1,20 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=artwork-windows-cursor
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Windows cursor theme"
+arch=('any')
+url='https://github.com/ds9-artwork/artwork-windows-cursor'
+license=('GPL')
+groups=('syncretic-core')
+makedepends=('git')
+source=('git://github.com/ds9-artwork/artwork-windows-cursor')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR usr $pkgdir/
+}

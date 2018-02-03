@@ -1,0 +1,20 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=artwork-color-scheme-carbon
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Carbon Color Scheme for Plasma"
+arch=('any')
+url='https://github.com/ds9-artwork/artwork-color-scheme-carbon'
+license=('GPL')
+groups=('syncretic-core')
+makedepends=('git')
+source=('git://github.com/ds9-artwork/artwork-color-scheme-carbon')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR usr $pkgdir/
+}

@@ -1,0 +1,21 @@
+# $Id$
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=default-settings-xdg-user-dirs
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Override for customizing user dirs"
+arch=('any')
+url='https://github.com/ds9-common/default-settings-xdg-user-dirs'
+license=('GPL')
+groups=('syncretic-core')
+depends=('xdg-user-dirs')
+makedepends=('git')
+source=('git://github.com/ds9-common/default-settings-xdg-user-dirs')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR usr $pkgdir/
+}

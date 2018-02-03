@@ -1,0 +1,34 @@
+# $Id$
+# Maintainer: Leszek Lesner <leszek@zevenos.com>
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=carbon-gtk2
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Carbon widget theme for GTK+-based applications"
+arch=('i686' 'x86_64')
+url='https://github.com/netrunner-extras/carbon-gtk.git'
+license=('GPL')
+groups=('syncretic-core')
+depends=('cairo' 'gdk-pixbuf2' 'pango' 'libx11')
+makedepends=('cmake' 'git' 'pkg-config' 'glib2' 'gtk2')
+source=('git://github.com/ds9-extras/carbon-gtk2.git')
+md5sums=('SKIP')
+
+pkgver() {
+cd "$srcdir/$pkgname"
+printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd $srcdir/$pkgname
+  rm -rf build && mkdir build && cd build
+  cmake ..
+  make
+}
+
+package() {
+  cd $srcdir/$pkgname/build 
+  make DESTDIR=$pkgdir install
+} 

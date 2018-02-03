@@ -1,0 +1,40 @@
+# $Id$
+# Maintainer: Philipp Schmidt <philschmidt@gmx.net>
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+_pkgname=samba-mounter
+pkgname=kcm-samba-mounter
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="KDE control module mount tool for samba"
+url="https://cgit.kde.org/samba-mounter.git"
+arch=('i686' 'x86_64')
+license=('GPL')
+groups=('syncretic-core')
+depends=('kauth' 'cifs-utils' 'smbclient' 'kcmutils' 'kconfig' 'kio' 'ki18n' 'solid')
+makedepends=('cmake' 'git' 'extra-cmake-modules')
+replaces=('samba-mounter' 'samba-mounter-git' 'samba-mounter-frameworks-git')
+source=("git://anongit.kde.org/samba-mounter.git")
+sha256sums=('SKIP')
+
+prepare() {
+  mkdir -p build
+}
+
+build() {
+  cd build
+  cmake ../${_pkgname} \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DLIB_INSTALL_DIR=lib \
+    -DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+    -DBUILD_TESTING=OFF
+  make
+}
+
+
+package() {
+  cd build
+  make DESTDIR="${pkgdir}" install
+}
