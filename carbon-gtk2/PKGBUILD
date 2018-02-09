@@ -16,11 +16,6 @@ makedepends=('cmake' 'git' 'pkg-config' 'glib2' 'gtk2')
 source=('git://github.com/ds9-extras/carbon-gtk2.git')
 md5sums=('SKIP')
 
-pkgver() {
-cd "$srcdir/$pkgname"
-printf "0+git`date +%Y%m%d`.%s"  "$(git rev-parse --short HEAD)"
-}
-
 build() {
   cd $srcdir/$pkgname
   rm -rf build && mkdir build && cd build
