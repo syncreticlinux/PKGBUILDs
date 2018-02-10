@@ -1,0 +1,23 @@
+# Maintainer: Philip Müller <philm[at]manjaro[dog]org>
+# Contributor: artoo <artoo@manjaro.org>
+# Contributor: anex <assassin.anex[@]gmail.com>
+
+
+pkgbase=grub-theme-live
+pkgname=grub-theme-live-syncretic
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc='Netrunner Linux grub theme for install media'
+arch=('any')
+url="https://github.com/syncreticlinux/grub-theme-live-syncretic"
+license=('GPL')
+makedepends=('git')
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+package_grub-theme-live-syncretic() {
+    depends=('grub-theme-live-common')
+
+    cd grub-theme-live
+    make PREFIX=/usr DESTDIR=${pkgdir} install
+}
