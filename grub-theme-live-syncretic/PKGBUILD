@@ -18,6 +18,6 @@ sha256sums=('SKIP')
 package_grub-theme-live-syncretic() {
     depends=('grub-theme-live-common')
 
-    cd grub-theme-live
+    cd grub-theme-live-syncretic
     make PREFIX=/usr DESTDIR=${pkgdir} install
 }
