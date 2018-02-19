@@ -2,8 +2,6 @@
 # Contributor: artoo <artoo@manjaro.org>
 # Contributor: anex <assassin.anex[@]gmail.com>
 
-
-pkgbase=grub-theme-live
 pkgname=grub-theme-live-syncretic
 pkgver=$(date +%Y.%m.%d)
 pkgrel=1
@@ -16,8 +14,7 @@ source=("git+$url.git")
 sha256sums=('SKIP')
 
 package_grub-theme-live-syncretic() {
-    depends=('grub-theme-live-common')
-
+#     depends=('grub-theme-live-common')
     cd grub-theme-live-syncretic
     make PREFIX=/usr DESTDIR=${pkgdir} install
 }
