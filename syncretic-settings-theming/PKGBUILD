@@ -7,11 +7,11 @@ pkgver=$(date +%Y.%m)
 pkgrel=1
 pkgdesc="Default theming settings"
 arch=('any')
-url='https://github.com/netrunner-common/netrunner-settings-theming'
+url='https://github.com/syncreticlinux/syncretic-settings-theming'
 license=('GPL')
 groups=('syncretic-common')
 makedepends=('git')
-source=('git://github.com/netrunner-common/netrunner-settings-theming' 'Trolltech.conf' 'kcminputrc' '.imwheelrc')
+source=('git://github.com/syncreticlinux/syncretic-settings-theming' 'Trolltech.conf' 'kcminputrc' '.imwheelrc')
 md5sums=('SKIP' 'SKIP' 'SKIP' 'SKIP')
 
 prepare() {
