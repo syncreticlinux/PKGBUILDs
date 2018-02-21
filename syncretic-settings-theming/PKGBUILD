@@ -3,7 +3,7 @@
 # Maintainer: Matt Kowal <matt@mkxt.net>
 
 pkgname=syncretic-settings-theming
-pkgver=$(date +%Y.%m)
+ppkgver=$(date +%Y.%m.%d)
 pkgrel=1
 pkgdesc="Default theming settings"
 arch=('any')
