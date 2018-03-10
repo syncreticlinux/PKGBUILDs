@@ -1,0 +1,21 @@
+pkgname=syncretic-sddm-theme
+pkgver=2016.10.21
+pkgrel=1
+pkgdesc="Syncretic Linux SDDM Theme"
+arch=('any')
+url='https://github.com/nurunner-linux/nurunner-sddm-theme'
+license=('GPL')
+groups=('kde')
+makedepends=('git')
+source=('git://github.com/nurunner-linux/nurunner-sddm-theme')
+md5sums=('SKIP')
+
+pkgver() {
+date +%Y.%m.%d
+}
+
+package() {
+  cd $srcdir/nurunner-sddm-theme
+  cp -aR usr $pkgdir/
+}
+ 
