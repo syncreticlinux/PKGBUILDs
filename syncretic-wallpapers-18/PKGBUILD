@@ -1,0 +1,20 @@
+pkgname=syncretic-wallpapers-18
+pkgver=2018.3.10
+pkgrel=1
+pkgdesc="Default Wallpapers for Syncretic - 2018"
+arch=('any')
+url='https://github.com/syncreticlinux/syncretic-wallpapers-18'
+license=('GPL')
+groups=('syncretic-core')
+makedepends=('git')
+source=('git://github.com/syncreticlinux/syncretic-wallpapers-18.git')
+md5sums=('SKIP')
+
+pkgver() {
+date +%Y.%m.%d
+}
+
+package() {
+  cd $srcdir/syncretic-wallpapers-18
+  cp -aR usr $pkgdir/
+}
