@@ -1,0 +1,28 @@
+# Maintainer: Chrysostomus @forum.manjaro.org
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=syncretic-zsh-config
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Zsh configuration for Syncretic"
+arch=(any)
+url="https://github.com/syncreticlinux/syncretic-zsh-config"
+
+license=('MIT')
+conflicts=('grml-zsh-config')
+depends=('zsh-autosuggestions'
+	'zsh-syntax-highlighting'
+	'zsh-completions'
+	'zsh-history-substring-search'
+	'zsh')
+source=("git://github.com/syncreticlinux/syncretic-zsh-config")
+md5sums=('SKIP')
+
+package() {
+	cd ${srcdir}
+	install -D -m644 $srcdir/$pkgname-$_gitcommit/.zshrc ${pkgdir}/etc/skel/.zshrc
+	install -D -m644 $srcdir/$pkgname-$_gitcommit/rootzshrc ${pkgdir}/root/.zshrc
+	mkdir -p $pkgdir/usr/share/zsh/scripts
+	cp -r $srcdir/$pkgname-$_gitcommit/base16-shell $pkgdir/usr/share/zsh/scripts
+	chmod a+x $pkgdir/usr/share/zsh/scripts/base16-shell/*
+}
