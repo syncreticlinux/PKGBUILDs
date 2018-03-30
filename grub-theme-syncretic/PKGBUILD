@@ -1,0 +1,20 @@
+# Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=grub-theme-syncretic
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Default Grub theme for Syncretic"
+arch=('any')
+url='https://github.com/syncreticlinux/grub-theme-syncretic'
+license=('GPL')
+groups=('syncretic-core')
+makedepends=('git')
+install=$pkgname.install
+source=('git://github.com/syncreticlinux/grub-theme-syncretic')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR boot $pkgdir/
+}

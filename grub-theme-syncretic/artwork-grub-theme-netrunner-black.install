@@ -1,0 +1,9 @@
+post_install() {
+
+  sed -i -e 's,.*GRUB_THEME=.*,GRUB_THEME="/boot/grub/themes/netrunner-black/theme.txt",' /etc/default/grub
+  sed -i -e 's,.*GRUB_BACKGROUND=.*,#GRUB_BACKGROUND=,' /etc/default/grub
+  sed -i -e 's,.*GRUB_COLOR_HIGHLIGHT=.*,#GRUB_COLOR_HIGHLIGHT=,' /etc/default/grub
+  sed -i -e 's,.*GRUB_COLOR_NORMAL=.*,#GRUB_COLOR_NORMAL=,' /etc/default/grub
+  sed -i -e 's,.*GRUB_DISTRIBUTOR=.*,GRUB_DISTRIBUTOR="Netrunner Rolling",' /etc/default/grub
+  grub-mkconfig -o /boot/grub/grub.cfg
+}
