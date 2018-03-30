@@ -4,7 +4,7 @@
 
 pkgname=grub-theme-live-syncretic
 pkgver=$(date +%Y.%m.%d)
-pkgrel=2
+pkgrel=1
 pkgdesc='Syncretic Linux grub theme for install media'
 arch=('any')
 url="https://github.com/syncreticlinux/grub-theme-live-syncretic"
