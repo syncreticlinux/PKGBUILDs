@@ -1,8 +1,9 @@
-# Maintainer: Philip Müller <philm[at]manjaro[dog]org>
+# Maintainer: Matt Kowal <matt[at]mkxt[dog]net>
+# Contributor: Philip Müller <philm[at]manjaro[dog]org>
 
 pkgname=calamares
-pkgver=3.1.12
-_pkgver=3.1.12
+pkgver=3.2.1
+_pkgver=3.2.1
 pkgrel=5
 pkgdesc='Distribution-independent installer framework'
 arch=('i686' 'x86_64')
