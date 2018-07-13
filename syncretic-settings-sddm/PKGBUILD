@@ -2,7 +2,7 @@
 # Maintainer: Matt Kowal <matt@mkxt.net>
 
 pkgname=netrunner-settings-sddm
-pkgver=$(date +%Y.%m)
+pkgver=$(date +%Y.%m.%d)
 pkgrel=1
 pkgdesc="SDDM Settings for Syncretic"
 arch=('any')
