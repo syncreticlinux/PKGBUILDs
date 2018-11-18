@@ -1,0 +1,18 @@
+# Maintainer: Matt Kowal <matt@mkxt.net>
+
+pkgname=desktop-theme-syncretism
+pkgver=$(date +%Y.%m.%d)
+pkgrel=1
+pkgdesc="Syncretism Desktop Theme"
+arch=('any')
+url='https://github.com/syncreticlinux/desktop-theme-syncretism'
+license=('GPL')
+groups=('syncretic-core')
+makedepends=('git')
+source=('git://github.com/syncreticlinux/desktop-theme-syncretism')
+md5sums=('SKIP')
+
+package() {
+  cd $srcdir/$pkgname
+  cp -aR usr $pkgdir/
+}
