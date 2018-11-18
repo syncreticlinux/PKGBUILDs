@@ -7,17 +7,15 @@ pkgver=$(date +%Y.%m.%d)
 pkgrel=1
 pkgdesc="Default Settings for KDE Apps"
 arch=('any')
-url='https://github.com/ds9-common/default-settings-kdeapps'
+url='https://github.com/syncreticlinux/default-settings-kdeapps'
 license=('GPL')
 groups=('syncretic-core')
 makedepends=('git')
-source=('git://github.com/ds9-common/default-settings-kdeapps')
+source=('git://github.com/syncreticlinux/default-settings-kdeapps')
 md5sums=('SKIP')
 
 package() {
   cd $srcdir/$pkgname
   cp -aR etc $pkgdir/
   cp -aR usr $pkgdir/
-  sed -e "s|15|17|" \
-  -i "$pkgdir/usr/share/default-settings/plasma5-profile/kxmlgui5/dolphin/dolphinui.rc"
 }
